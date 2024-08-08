@@ -1,0 +1,48 @@
+{
+  "name": "solanabuddybot_v2",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "eslint": "eslint . --fix",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "@types/node": "^22.1.0",
+    "@types/node-telegram-bot-api": "^0.64.7",
+    "eslint": "9.x",
+    "globals": "^15.9.0",
+    "husky": "^9.1.4",
+    "nodemon": "^3.1.4",
+    "prettier": "3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.18.0",
+    "@solana/spl-token": "^0.4.8",
+    "@solana/web3.js": "^1.95.2",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.4.5",
+    "lint-staged": "^15.2.8",
+    "node-telegram-bot-api": "^0.66.0",
+    "prisma": "^5.18.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint . --fix",
+      "prettier . --write"
+    ]
+  }
+}
