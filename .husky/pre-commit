@@ -2,3 +2,4 @@ echo "Running Precommit Hook"
 rm -rf dist
 yarn run build
 yarn lint-staged
+git add .

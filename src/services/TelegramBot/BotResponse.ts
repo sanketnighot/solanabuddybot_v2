@@ -18,18 +18,3 @@ export default async function SendBotResponse(
     logger.error("Error sending bot response", { error, chatId, text })
   }
 }
-
-// const menuWithoutWallet: KeyboardButton[][] = [
-//   [{ text: "Create/Import Account" }],
-//   [{ text: "Manage Subscriptions" }],
-//   [{ text: "Airdrop (Devnet)" }],
-//   [{ text: "About" }],
-// ]
-
-// const menuWithWallet: KeyboardButton[][] = [
-//   [{ text: "My Account" }],
-//   [{ text: "Manage Subscriptions" }],
-//   [{ text: "Play Mini Games" }],
-//   [{ text: "NFT Gallery" }],
-//   [{ text: "About" }],
-// ]

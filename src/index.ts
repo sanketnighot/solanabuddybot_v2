@@ -1,25 +1,40 @@
-// import { onStart } from "./services/TelegramBot/commands/onStart"
-// import bot from "./services/TelegramBot/telegramBot"
-// import logger from "./utils/logger"
-import { getWalletsForUser } from "./services/PrismaClient/Models/SolWallets.prisma"
+import { CallbackQuery, Message } from "node-telegram-bot-api"
+import { ensureUser } from "./services/PrismaClient/Models/Users.prisma"
+import { onStart } from "./services/TelegramBot/commands/onStart"
+import bot from "./services/TelegramBot/telegramBot"
+import logger from "./utils/logger"
+import {
+  handleSubscription,
+  manageSubscriptions,
+} from "./services/TelegramBot/mainMenu/manageSubscriptions"
 
-// Error handling
-// try {
-//   bot.on("polling_error", (error) => {
-//     logger.error("Polling Error", error)
-//   })
-//   bot.onText(/\/start/, async (msg) => {
-//     await onStart(msg)
-//   })
-// } catch (error) {
-//   logger.error("Error at bot.on", error)
-//   process.exit(1)
-// }
+try {
+  bot.on("polling_error", (error) => {
+    logger.error("Polling Error", error)
+  })
 
-async function main() {
-  const result = await getWalletsForUser(BigInt(32424))
-  console.log(result)
-  console.log(result.data?.SolWallets)
+  bot.on("message", async (msg: Message) => {
+    await ensureUser(msg)
+    switch (msg.text) {
+      case "⚙️ Manage Subscriptions":
+        await manageSubscriptions(msg)
+        break
+    }
+  })
+
+  bot.on("callback_query", async (query: CallbackQuery) => {
+    const [query_type] = query.data!.split("/")
+    switch (query_type) {
+      case "subscription":
+        await handleSubscription(query)
+        break
+    }
+  })
+
+  bot.onText(/\/start/, async (msg: Message) => {
+    await onStart(msg)
+  })
+} catch (error) {
+  logger.error("Error at bot.on", error)
+  process.exit(1)
 }
-
-main()

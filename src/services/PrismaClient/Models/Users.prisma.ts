@@ -1,6 +1,7 @@
 import { User } from "@prisma/client"
 import logger from "../../../utils/logger"
 import prisma from "../prismaClient"
+import { Message } from "node-telegram-bot-api"
 
 type userType =
   | ({
@@ -32,10 +33,7 @@ type userType =
   | null
 
 export const ensureUser = async (
-  chatId: bigint,
-  username: string,
-  firstName: string,
-  lastName: string
+  msg: Message
 ): Promise<{
   success: boolean
   data?: Partial<User>
@@ -43,6 +41,14 @@ export const ensureUser = async (
   message: string
 }> => {
   try {
+    const chatId = BigInt(msg.from?.id || 0)
+
+    if (chatId === BigInt(0)) {
+      return { success: false, message: "Unable to get user id" }
+    }
+    const username = msg.from?.username
+    const firstName = msg.from?.first_name
+    const lastName = msg.from?.last_name
     const user = await prisma.user.upsert({
       where: { chatId },
       update: {
@@ -68,7 +74,7 @@ export const ensureUser = async (
       message: "User created/updated successfully",
     }
   } catch (error) {
-    logger.error(`Error creating/updating user ${chatId}`, error)
+    logger.error(`Error creating/updating user ${msg.from?.id}`, error)
     return {
       success: false,
       error: error,
@@ -86,6 +92,9 @@ export const getUser = async (
   message: string
 }> => {
   try {
+    if (chatId === BigInt(0)) {
+      return { success: false, message: "Unable to get user id" }
+    }
     const user = await prisma.user.findUnique({
       where: { chatId },
       include: {
