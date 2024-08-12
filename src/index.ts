@@ -7,6 +7,8 @@ import {
   handleSubscription,
   manageSubscriptions,
 } from "./services/TelegramBot/mainMenu/manageSubscriptions"
+import sendAboutMessage from "./services/TelegramBot/mainMenu/aboutMessage"
+import SendBotResponse from "./services/TelegramBot/BotResponse"
 
 try {
   bot.on("polling_error", (error) => {
@@ -18,6 +20,12 @@ try {
     switch (msg.text) {
       case "⚙️ Manage Subscriptions":
         await manageSubscriptions(msg)
+        break
+      case "🔑 Create/Import Account":
+        await SendBotResponse(msg.chat.id, "Coming Soon")
+        break
+      case "ℹ️ About":
+        await sendAboutMessage(msg)
         break
     }
   })

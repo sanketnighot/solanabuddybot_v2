@@ -2,8 +2,7 @@ import { ReplyKeyboardMarkup } from "node-telegram-bot-api"
 
 export const mainMenuWithoutWallets: ReplyKeyboardMarkup = {
   keyboard: [
-    [{ text: "🔑 Create/Import Account" }],
-    [{ text: "⚙️ Manage Subscriptions" }, { text: "💰 Airdrop (Devnet)" }],
+    [{ text: "🔑 Create/Import Account" }, { text: "⚙️ Manage Subscriptions" }],
     [{ text: "ℹ️ About" }],
   ],
   resize_keyboard: true,
