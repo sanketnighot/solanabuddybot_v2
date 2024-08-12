@@ -10,7 +10,7 @@ import {
 
 try {
   bot.on("polling_error", (error) => {
-    logger.error("Polling Error", error)
+    logger.error("Polling Errors", error)
   })
 
   bot.on("message", async (msg: Message) => {
