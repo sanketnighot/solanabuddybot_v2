@@ -1,5 +1,5 @@
 import TelegramBot from "node-telegram-bot-api"
-import logger from "../../utils/logger"
+import logger from "../../../utils/logger"
 
 export const clearPendingUpdates = async (bot: TelegramBot): Promise<void> => {
   try {

@@ -15,25 +15,28 @@ datasource db {
 
 model User {
   // TODO: Need to handle subscription logic for users.
-  id            String         @id @default(uuid())
-  chatId        BigInt         @unique
-  username      String?
-  firstName     String?
-  lastName      String?
-  subscriptions Subscription[]
-  SolWallets    SolWallet[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  id              String         @id @default(cuid())
+  chatId          BigInt         @unique
+  username        String?
+  firstName       String?
+  lastName        String?
+  subscriptions   Subscription[]
+  SolWallets      SolWallet[]    @relation("UserWallets")
+  defaultWallet   SolWallet?     @relation("DefaultWallet", fields: [defaultWalletId], references: [id])
+  defaultWalletId String?        @unique
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
   @@index([chatId])
 }
 
 model SolWallet {
-  id         String   @id @default(uuid())
+  id         String   @id @default(cuid())
   publicKey  String
   privateKey String
-  user       User     @relation(fields: [userId], references: [id])
+  user       User     @relation("UserWallets", fields: [userId], references: [id])
   userId     String
+  defaultFor User?    @relation("DefaultWallet")
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -42,7 +45,7 @@ model SolWallet {
 }
 
 model Subscription {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   users       User[]
   name        String
   description String

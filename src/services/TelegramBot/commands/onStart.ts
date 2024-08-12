@@ -1,12 +1,9 @@
 import { Message } from "node-telegram-bot-api"
-import SendBotResponse from "../BotResponse"
+import SendBotResponse from "../utils/BotResponse"
 import logger from "../../../utils/logger"
-import { getWelcomeMessage } from "../../../utils/messages"
+import { getWelcomeMessage } from "../utils/messages"
 import { getUser } from "../../PrismaClient/Models/Users.prisma"
-import {
-  mainMenuWithoutWallets,
-  mainMenuWithWallets,
-} from "../../../utils/keyboards"
+import { mainMenuWithoutWallets, mainMenuWithWallets } from "../utils/keyboards"
 
 export async function onStart(msg: Message) {
   try {

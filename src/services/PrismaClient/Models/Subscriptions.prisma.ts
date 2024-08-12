@@ -2,8 +2,8 @@ import { Subscription, User } from "@prisma/client"
 import logger from "../../../utils/logger"
 import prisma from "../prismaClient"
 import { CallbackQuery } from "node-telegram-bot-api"
-import bot from "../../TelegramBot/telegramBot"
-import SendBotResponse from "../../TelegramBot/BotResponse"
+import bot from "../../TelegramBot"
+import SendBotResponse from "../../TelegramBot/utils/BotResponse"
 
 export const createSubscription = async (
   subscription: Partial<Subscription>

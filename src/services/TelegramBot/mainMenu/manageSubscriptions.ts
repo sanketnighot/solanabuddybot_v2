@@ -2,7 +2,7 @@ import { CallbackQuery, Message } from "node-telegram-bot-api"
 import prisma from "../../PrismaClient/prismaClient"
 import logger from "../../../utils/logger"
 import { Subscription } from "@prisma/client"
-import SendBotResponse from "../BotResponse"
+import SendBotResponse from "../utils/BotResponse"
 import {
   handleSubscribeForUser,
   handleUnsubscribeForUser,
@@ -52,7 +52,7 @@ export const manageSubscriptions = async (
           [
             {
               text: subscription.isSubscribed
-                ? "❌ UnSubscribe"
+                ? "❌ Unsubscribe"
                 : "✅ Subscribe",
               callback_data: `subscription/${subscription.isSubscribed ? "unsubscribe" : "subscribe"}/${subscription.id}/nc`,
               one_time_keyboard: true,
@@ -126,7 +126,7 @@ export const handleSubscription = async (query: CallbackQuery) => {
           ]
           SendBotResponse(
             query.from.id,
-            "Are you sure you want to UnSubscribe?",
+            "Are you sure you want to Unsubscribe?",
             { reply_markup: { inline_keyboard } }
           )
         } else if (query_status === "c") {

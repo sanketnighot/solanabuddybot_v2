@@ -5,6 +5,7 @@ CREATE TABLE "User" (
     "username" TEXT,
     "firstName" TEXT,
     "lastName" TEXT,
+    "defaultWalletId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -28,7 +29,8 @@ CREATE TABLE "Subscription" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "price" INTEGER NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
+    "validity" INTEGER NOT NULL DEFAULT 30,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -43,6 +45,9 @@ CREATE TABLE "_SubscriptionToUser" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_chatId_key" ON "User"("chatId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_defaultWalletId_key" ON "User"("defaultWalletId");
 
 -- CreateIndex
 CREATE INDEX "User_chatId_idx" ON "User"("chatId");
@@ -61,6 +66,9 @@ CREATE UNIQUE INDEX "_SubscriptionToUser_AB_unique" ON "_SubscriptionToUser"("A"
 
 -- CreateIndex
 CREATE INDEX "_SubscriptionToUser_B_index" ON "_SubscriptionToUser"("B");
+
+-- AddForeignKey
+ALTER TABLE "User" ADD CONSTRAINT "User_defaultWalletId_fkey" FOREIGN KEY ("defaultWalletId") REFERENCES "SolWallet"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SolWallet" ADD CONSTRAINT "SolWallet_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
