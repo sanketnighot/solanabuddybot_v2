@@ -24,3 +24,22 @@ export const getAboutMessage = (username: string): string => {
 
   return message
 }
+
+export const getHelpMessage = (username: string): string => {
+  let message = `Hello <b>${username === "User" ? "" : "@"}${username}</b>👋! Thank you for choosing Solana Buddy Bot 🙏. \n\n`
+  message += "Here's what I can do for you: \n\n"
+  message += "🔑 Create and manage Solana wallets \n"
+  message += "💰 Check your SOL balance \n"
+  message += "🪙 Create and transfer tokens \n"
+  message += "🎮 Play mini-games \n"
+  message += "♾️ And Many more ... \n\n"
+  message += "Need help? Just type /help anytime!"
+  return message
+}
+
+export const getAccountDashboardMessage = (username: string): string => {
+  let message = `Hello <b>${username === "User" ? "" : "@"}${username}</b>👋! Welcome Back ✌️.`
+  message += "Here are yout Account Details: \n\n"
+
+  return message
+}

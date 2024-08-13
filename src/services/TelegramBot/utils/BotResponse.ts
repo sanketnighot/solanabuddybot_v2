@@ -17,7 +17,8 @@ export default async function SendBotResponse(
       ...options, // Spread the provided options to keep any custom settings
     }
 
-    await bot.sendMessage(chatId, text, sendMessageOptions)
+    const response = await bot.sendMessage(chatId, text, sendMessageOptions)
+    return response
   } catch (error) {
     logger.error("Error sending bot response", { error, chatId, text })
   }

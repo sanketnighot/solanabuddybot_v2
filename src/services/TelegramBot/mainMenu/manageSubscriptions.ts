@@ -56,6 +56,7 @@ export const manageSubscriptions = async (
                 : "✅ Subscribe",
               callback_data: `subscription/${subscription.isSubscribed ? "unsubscribe" : "subscribe"}/${subscription.id}/nc`,
               one_time_keyboard: true,
+              message: "Are you sure you want to Subscribe?",
             },
           ],
         ],

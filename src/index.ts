@@ -1,6 +1,7 @@
 import { CallbackQuery, Message } from "node-telegram-bot-api"
 import { ensureUser } from "./services/PrismaClient/Models/Users.prisma"
-import { onStart } from "./services/TelegramBot/commands/onStart"
+import onStart from "./services/TelegramBot/commands/onStart"
+import onHelp from "./services/TelegramBot/commands/onHelp"
 import bot from "./services/TelegramBot"
 import logger from "./utils/logger"
 import {
@@ -11,6 +12,7 @@ import sendAboutMessage from "./services/TelegramBot/mainMenu/aboutMessage"
 import SendBotResponse from "./services/TelegramBot/utils/BotResponse"
 import { createAccountKeyboard } from "./services/TelegramBot/utils/keyboards"
 import { manageAccount } from "./services/TelegramBot/mainMenu/manageAccount"
+import { sendAccountDashboard } from "./services/TelegramBot/mainMenu/accountDashboard"
 
 try {
   bot.on("polling_error", (error) => {
@@ -35,10 +37,14 @@ try {
       case "ℹ️ About":
         await sendAboutMessage(msg)
         break
+      case "🏦 My Account":
+        await sendAccountDashboard(msg)
+        break
     }
   })
 
   bot.on("callback_query", async (query: CallbackQuery) => {
+    console.log(query)
     const [query_type] = query.data!.split("/")
     switch (query_type) {
       case "subscription":
@@ -54,6 +60,10 @@ try {
 
   bot.onText(/\/start/, async (msg: Message) => {
     await onStart(msg)
+  })
+
+  bot.onText(/\/help/, async (msg: Message) => {
+    await onHelp(msg)
   })
 } catch (error) {
   logger.error("Error at bot.on", error)

@@ -27,6 +27,7 @@ type userType =
       username: string | null
       firstName: string | null
       lastName: string | null
+      defaultWalletId: string | null
       createdAt: Date
       updatedAt: Date
     })

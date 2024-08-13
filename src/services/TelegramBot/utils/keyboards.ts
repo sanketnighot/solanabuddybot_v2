@@ -15,11 +15,10 @@ export const mainMenuWithoutWallets: ReplyKeyboardMarkup = {
 
 export const mainMenuWithWallets: ReplyKeyboardMarkup = {
   keyboard: [
-    [{ text: "🏦 My Account" }],
+    [{ text: "🏦 My Account" }, { text: "🔑 Create/Import Account" }],
     [{ text: "⚙️ Manage Subscriptions" }, { text: "💰 Airdrop (Devnet)" }],
-    [{ text: "🎮 Play Mini Games" }],
-    [{ text: "🖼️ NFT Gallery" }],
-    [{ text: "👤 About" }],
+    [{ text: "🎮 Play Mini Games" }, { text: "🖼️ NFT Gallery" }],
+    [{ text: "ℹ️ About" }],
   ],
   resize_keyboard: true,
   is_persistent: true,

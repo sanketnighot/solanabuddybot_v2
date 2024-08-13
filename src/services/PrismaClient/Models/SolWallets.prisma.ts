@@ -32,6 +32,22 @@ export const createSolWallet = async (
         user: true,
       },
     })
+    if (!solWallet) {
+      return {
+        success: false,
+        message: "Solana wallet creation failed.",
+      }
+    }
+    if (!solWallet.user.defaultWalletId) {
+      await prisma.user.update({
+        where: {
+          id: userResult.data.id!,
+        },
+        data: {
+          defaultWalletId: solWallet.id,
+        },
+      })
+    }
     return {
       success: true,
       data: solWallet,
