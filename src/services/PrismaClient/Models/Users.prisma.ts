@@ -1,36 +1,13 @@
-import { User } from "@prisma/client"
+import { SolWallet, Subscription, User } from "@prisma/client"
 import logger from "../../../utils/logger"
 import prisma from "../prismaClient"
 import { Message } from "node-telegram-bot-api"
 
 type userType =
   | ({
-      subscriptions: {
-        id: string
-        name: string
-        description: string
-        price: number
-        createdAt: Date
-        updatedAt: Date
-      }[]
-      SolWallets: {
-        id: string
-        publicKey: string
-        privateKey: string
-        userId: string
-        createdAt: Date
-        updatedAt: Date
-      }[]
-    } & {
-      id: string
-      chatId: bigint
-      username: string | null
-      firstName: string | null
-      lastName: string | null
-      defaultWalletId: string | null
-      createdAt: Date
-      updatedAt: Date
-    })
+      subscriptions: Subscription[]
+      SolWallets: SolWallet[]
+    } & User)
   | null
 
 export const ensureUser = async (

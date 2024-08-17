@@ -20,6 +20,7 @@ model User {
   username        String?
   firstName       String?
   lastName        String?
+  password        String?
   subscriptions   Subscription[]
   SolWallets      SolWallet[]    @relation("UserWallets")
   defaultWallet   SolWallet?     @relation("DefaultWallet", fields: [defaultWalletId], references: [id])

@@ -5,7 +5,7 @@ import {
 
 export const mainMenuWithoutWallets: ReplyKeyboardMarkup = {
   keyboard: [
-    [{ text: "🔑 Create/Import Account" }, { text: "⚙️ Manage Subscriptions" }],
+    [{ text: "🔑 Create/Import Account" }, { text: "❇️ Manage Subscriptions" }],
     [{ text: "ℹ️ About" }],
   ],
   resize_keyboard: true,
@@ -16,9 +16,9 @@ export const mainMenuWithoutWallets: ReplyKeyboardMarkup = {
 export const mainMenuWithWallets: ReplyKeyboardMarkup = {
   keyboard: [
     [{ text: "🏦 My Account" }, { text: "🔑 Create/Import Account" }],
-    [{ text: "⚙️ Manage Subscriptions" }, { text: "💰 Airdrop (Devnet)" }],
+    [{ text: "❇️ Manage Subscriptions" }, { text: "💰 Airdrop (Devnet)" }],
     [{ text: "🎮 Play Mini Games" }, { text: "🖼️ NFT Gallery" }],
-    [{ text: "ℹ️ About" }],
+    [{ text: "⚙️ Settings" }, { text: "ℹ️ About" }],
   ],
   resize_keyboard: true,
   is_persistent: true,

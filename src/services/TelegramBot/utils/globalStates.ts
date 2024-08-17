@@ -1,6 +1,8 @@
 interface IPasswordGenerationState {
-  password: string[]
-  previosMessageId?: number
+  password?: string
+  confirmPassword?: string
+  status: "initial" | "created" | "confirming"
+  prevChatId?: number
 }
 
 export const passwordGenerationState = new Map<
